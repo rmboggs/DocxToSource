@@ -1,0 +1,3 @@
+[submodule "src/Serialize.OpenXml.CodeGen"]
+	path = src/Serialize.OpenXml.CodeGen
+	url = git@github.com:rmboggs/Serialize.OpenXml.CodeGen.git
