@@ -2,8 +2,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+        Width="800" Height="600" WindowStartupLocation="CenterScreen"
         x:Class="DocxToSource.Avalonia.MainWindow"
-        Title="DocxToSource.Avalonia">
-    Welcome to Avalonia!
+        Title="Docx To Source">
+    <DockPanel LastChildFill="True">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open"/>
+                <MenuItem Header="_Close"/>
+                <Separator/>
+                <MenuItem Header="_Quit"/>
+            </MenuItem>
+            <MenuItem Header="_Options">
+                
+            </MenuItem>
+        </Menu>
+        <ItemsControl DockPanel.Dock="Bottom" Height="30">
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5">Code Provider: </TextBlock>
+        </ItemsControl>
+        <Grid DockPanel.Dock="Bottom" ColumnDefinitions="*,2*" RowDefinitions="*,*">
+            <TreeView Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" SelectionMode="Single">
+                
+            </TreeView>
+            <TextBlock Grid.Column="1" Grid.Row="0" Background="LightGray" Text="{Binding OuterXml}"/>
+            <TextBlock Grid.Column="1" Grid.Row="1" Background="LightYellow" Text="{Binding SourceCode}"/>
+        </Grid>
+    </DockPanel>
 </Window>
