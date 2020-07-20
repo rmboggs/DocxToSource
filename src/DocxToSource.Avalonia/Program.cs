@@ -18,6 +18,7 @@ namespace DocxToSource.Avalonia
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
+                .UseManagedSystemDialogs()
                 .LogToDebug();
     }
 }

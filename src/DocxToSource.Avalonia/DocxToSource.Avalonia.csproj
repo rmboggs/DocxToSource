@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="**\*.xaml.cs">
@@ -14,7 +14,7 @@
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.11" />
     <PackageReference Include="Avalonia.Desktop" Version="0.9.11" />
-    <PackageReference Include="Prism.Wpf" Version="7.2.0.1422" />
+    <PackageReference Include="Prism.Avalonia" Version="7.2.0.1428" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Serialize.OpenXml.CodeGen\src\Serialize.OpenXml.CodeGen\Serialize.OpenXml.CodeGen.csproj" />
