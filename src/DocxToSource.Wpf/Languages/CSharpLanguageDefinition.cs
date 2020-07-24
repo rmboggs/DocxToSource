@@ -25,7 +25,7 @@ using Microsoft.CSharp;
 namespace DocxToSource.Wpf.Languages
 {
     /// <summary>
-    /// Definition for the csharp language.
+    /// Definition for the CSharp language.
     /// </summary>
     public class CSharpLanguageDefinition : LanguageDefinition
     {
@@ -35,10 +35,9 @@ namespace DocxToSource.Wpf.Languages
         /// Initializes a new instance of the <see cref="CSharpLanguageDefinition"/>
         /// class that is empty.
         /// </summary>
-        public CSharpLanguageDefinition() : base()
+        public CSharpLanguageDefinition() : base(new CSharpCodeProvider())
         {
             DisplayName = "C#";
-            Provider = new CSharpCodeProvider();
         }
 
         #endregion

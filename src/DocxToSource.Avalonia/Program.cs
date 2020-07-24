@@ -2,7 +2,8 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Logging.Serilog;
+using Avalonia.Dialogs;
+using Avalonia.Logging;
 
 namespace DocxToSource.Avalonia
 {

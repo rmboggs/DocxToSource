@@ -20,20 +20,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 DEALINGS IN THE SOFTWARE.
 */
 
-using Boo.Lang;
 using Boo.Lang.CodeDom;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Serialize.OpenXml.CodeGen;
-using System.Globalization;
 
 namespace DocxToSource.Wpf.Languages
 {
     /// <summary>
-    /// Definition of the Boo language
+    /// Definition of the <see href="https://github.com/boo-lang/boo">Boo language</see>.
     /// </summary>
     public class BooLanguageDefinition : LanguageDefinition
     {
@@ -43,10 +36,10 @@ namespace DocxToSource.Wpf.Languages
         /// Initializes a new instance of the <see cref="BooLanguageDefinition"/> class
         /// that is empty.
         /// </summary>
-        public BooLanguageDefinition() : base(new BooNamespaceAliasOptions())
+        public BooLanguageDefinition()
+            : base(new BooNamespaceAliasOptions(), new BooCodeProvider())
         {
             DisplayName = "Boo";
-            Provider = new BooCodeProvider();
         }
 
         #endregion

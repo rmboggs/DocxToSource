@@ -5,11 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:source="http://icsharpcode.net/sharpdevelop/avalonedit"
         xmlns:local="clr-namespace:DocxToSource.Wpf"
+        xmlns:tree="clr-namespace:DocxToSource.Wpf.Controls"
         mc:Ignorable="d"
-        Title="Docx To Source" Height="600" Width="800">
+        Title="Docx To Source" Height="600" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <local:MainWindowModel/>
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Key="Q" Modifiers="Ctrl" Command="{Binding QuitCommand}"/>
+        <KeyBinding Key="O" Modifiers="Ctrl" Command="{Binding OpenCommand}"/>
+        <KeyBinding Key="C" Modifiers="Ctrl" Command="{Binding CloseCommand}"/>
+    </Window.InputBindings>
     <DockPanel LastChildFill="True">
+
+        <Menu DockPanel.Dock="Top" Height="auto">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open" InputGestureText="Ctrl+O" Command="{Binding OpenCommand}"/>
+                <MenuItem Header="_Close" InputGestureText="Ctrl+C" Command="{Binding CloseCommand}"/>
+                <Separator/>
+                <MenuItem Header="_Quit" InputGestureText="Ctrl+Q" Command="{Binding QuitCommand}"/>
+            </MenuItem>
+            <MenuItem Header="_Source Code">
+                <MenuItem Header="_Generate Source Code" IsCheckable="True" IsChecked="{Binding GenerateSourceCode}"/>
+                <Separator/>
+                <MenuItem Header="_Word Wrap" IsCheckable="True" IsChecked="{Binding WordWrap}"/>
+                <MenuItem Header="Syntax _Highlighting" IsCheckable="True" IsChecked="{Binding HighlightSyntax}" />
+            </MenuItem>
+
+        </Menu>
         <ToolBar DockPanel.Dock="Top">
-            
+            <TextBlock Margin="5 0">Language:</TextBlock>
+            <ComboBox
+                Width="125"
+                ItemsSource="{Binding LanguageDefinitions}"
+                SelectedItem="{Binding SelectedLanguage}">
+                
+            </ComboBox>
         </ToolBar>
         <StatusBar DockPanel.Dock="Bottom">
             <TextBlock/>
@@ -44,11 +76,23 @@
                 </ColumnDefinition>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <TreeViewItem Grid.Column="0"/>
+            <Grid.Resources>
+                <Style TargetType="{x:Type source:TextEditor}">
+                    <Setter Property="FontFamily" Value="Consolas"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="ShowLineNumbers" Value="True"/>
+                    <Setter Property="WordWrap" Value="{Binding WordWrap}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="IsReadOnly" Value="True"/>
+                </Style>
+            </Grid.Resources>
+            <tree:OpenXmlTreeView Grid.Column="0"
+                        ItemsSource="{Binding Path=TreeData}"
+                        SelectedTreeItem="{Binding Path=SelectedItem, Mode=TwoWay}" />
             <GridSplitter ResizeDirection="Columns" Background="Black" HorizontalAlignment="Stretch" ShowsPreview="True" Width="1" Grid.Column="1"/>
-            <source:TextEditor Grid.Column="2" Background="Beige"/>
+            <source:TextEditor Grid.Column="2" Background="Beige" IsReadOnly="True" Document ="{Binding XmlSourceDocument}" SyntaxHighlighting="{Binding XmlSourceDocumentSyntax}"/>
             <GridSplitter ResizeDirection="Columns" Background="Black" HorizontalAlignment="Stretch" ShowsPreview="True" Width="1" Grid.Column="3"/>
-            <source:TextEditor Grid.Column="4" Background="LightCyan"/>
+            <source:TextEditor Grid.Column="4" Background="LightCyan" IsReadOnly="True" Document="{Binding CodeDocument}" SyntaxHighlighting="{Binding CodeDocumentSyntax}"/>
         </Grid>
     </DockPanel>
 </Window>

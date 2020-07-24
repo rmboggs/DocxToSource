@@ -25,7 +25,7 @@ using Microsoft.VisualBasic;
 namespace DocxToSource.Wpf.Languages
 {
     /// <summary>
-    /// Definition for the visual basic language.
+    /// Definition for the Visual Basic.net language.
     /// </summary>
     public class VBLanguageDefinition : LanguageDefinition
     {
@@ -35,10 +35,9 @@ namespace DocxToSource.Wpf.Languages
         /// Initializes a new instance of the <see cref="VBLanguageDefinition"/>
         /// class that is empty.
         /// </summary>
-        public VBLanguageDefinition() : base()
+        public VBLanguageDefinition() : base(new VBCodeProvider())
         {
             DisplayName = "Visual Basic.Net";
-            Provider = new VBCodeProvider();
         }
 
         #endregion
