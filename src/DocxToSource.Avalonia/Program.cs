@@ -1,9 +1,5 @@
-﻿using System;
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
+﻿using Avalonia;
 using Avalonia.Dialogs;
-using Avalonia.Logging;
 
 namespace DocxToSource.Avalonia
 {

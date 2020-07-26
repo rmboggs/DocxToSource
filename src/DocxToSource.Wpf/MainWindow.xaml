@@ -50,9 +50,9 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="2"/>
-                <ColumnDefinition Width="2*">
+                <ColumnDefinition>
                     <ColumnDefinition.Style>
-                        <Style TargetType="ColumnDefinition">
+                        <Style TargetType="{x:Type ColumnDefinition}">
                             <Setter Property="Width" Value="0"/>
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsOpenXmlElement}" Value="True">
@@ -62,9 +62,9 @@
                         </Style>
                     </ColumnDefinition.Style>
                 </ColumnDefinition>
-                <ColumnDefinition Width="2">
+                <ColumnDefinition>
                     <ColumnDefinition.Style>
-                        <Style TargetType="ColumnDefinition">
+                        <Style TargetType="{x:Type ColumnDefinition}">
                             <Setter Property="Width" Value="0"/>
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsOpenXmlElement}" Value="True">
@@ -82,17 +82,19 @@
                     <Setter Property="FontSize" Value="12"/>
                     <Setter Property="ShowLineNumbers" Value="True"/>
                     <Setter Property="WordWrap" Value="{Binding WordWrap}"/>
-                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderThickness" Value="0"/>
                     <Setter Property="IsReadOnly" Value="True"/>
                 </Style>
             </Grid.Resources>
-            <tree:OpenXmlTreeView Grid.Column="0"
-                        ItemsSource="{Binding Path=TreeData}"
-                        SelectedTreeItem="{Binding Path=SelectedItem, Mode=TwoWay}" />
+            <tree:OpenXmlTreeView
+                Grid.Column="0"
+                BorderThickness="0"
+                ItemsSource="{Binding Path=TreeData}"
+                SelectedTreeItem="{Binding Path=SelectedItem, Mode=TwoWay}" />
             <GridSplitter ResizeDirection="Columns" Background="Black" HorizontalAlignment="Stretch" ShowsPreview="True" Width="1" Grid.Column="1"/>
-            <source:TextEditor Grid.Column="2" Background="Beige" IsReadOnly="True" Document ="{Binding XmlSourceDocument}" SyntaxHighlighting="{Binding XmlSourceDocumentSyntax}"/>
+            <source:TextEditor Grid.Column="2" Background="GhostWhite" Document ="{Binding XmlSourceDocument}" SyntaxHighlighting="{Binding XmlSourceDocumentSyntax}"/>
             <GridSplitter ResizeDirection="Columns" Background="Black" HorizontalAlignment="Stretch" ShowsPreview="True" Width="1" Grid.Column="3"/>
-            <source:TextEditor Grid.Column="4" Background="LightCyan" IsReadOnly="True" Document="{Binding CodeDocument}" SyntaxHighlighting="{Binding CodeDocumentSyntax}"/>
+            <source:TextEditor Grid.Column="4" Background="LightGoldenrodYellow" Document="{Binding CodeDocument}" SyntaxHighlighting="{Binding CodeDocumentSyntax}"/>
         </Grid>
     </DockPanel>
 </Window>

@@ -181,7 +181,7 @@ namespace DocxToSource.Wpf
             // Load the language definition list
             _languageDefinitions.Add(new CSharpLanguageDefinition());
             _languageDefinitions.Add(new VBLanguageDefinition());
-            _languageDefinitions.Add(new BooLanguageDefinition());
+            //_languageDefinitions.Add(new BooLanguageDefinition());
 
             // Set the default language
             SelectedLanguage = LanguageDefinitions[0];
@@ -575,9 +575,12 @@ namespace DocxToSource.Wpf
         }
 
         /// <summary>
-        /// Enables or disables syntax highlighting in the 
+        /// Enables or disables syntax highlighting in the code windows.
         /// </summary>
-        /// <param name="enable"></param>
+        /// <param name="enable">
+        /// <see langword="true"/> to turn on syntax highlighting; <see langword="false"/>
+        /// to turn it off.
+        /// </param>
         private void ToggleSyntaxHighlighting(bool enable)
         {
             CodeDocumentSyntax = enable ? SelectedLanguage.Highlighting : null;
