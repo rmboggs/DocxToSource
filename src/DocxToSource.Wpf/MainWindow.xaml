@@ -17,6 +17,15 @@
         <KeyBinding Key="O" Modifiers="Ctrl" Command="{Binding OpenCommand}"/>
         <KeyBinding Key="C" Modifiers="Ctrl" Command="{Binding CloseCommand}"/>
     </Window.InputBindings>
+    <Window.Resources>
+        <Style TargetType="{x:Type GridSplitter}">
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="ShowsPreview" Value="True"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+    </Window.Resources>
     <DockPanel LastChildFill="True">
 
         <Menu DockPanel.Dock="Top" Height="auto">
@@ -40,7 +49,7 @@
                 Width="125"
                 ItemsSource="{Binding LanguageDefinitions}"
                 SelectedItem="{Binding SelectedLanguage}">
-                
+
             </ComboBox>
         </ToolBar>
         <StatusBar DockPanel.Dock="Bottom">
@@ -48,53 +57,58 @@
         </StatusBar>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2"/>
-                <ColumnDefinition>
-                    <ColumnDefinition.Style>
-                        <Style TargetType="{x:Type ColumnDefinition}">
-                            <Setter Property="Width" Value="0"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsOpenXmlElement}" Value="True">
-                                    <Setter Property="Width" Value="2*"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ColumnDefinition.Style>
-                </ColumnDefinition>
-                <ColumnDefinition>
-                    <ColumnDefinition.Style>
-                        <Style TargetType="{x:Type ColumnDefinition}">
-                            <Setter Property="Width" Value="0"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsOpenXmlElement}" Value="True">
-                                    <Setter Property="Width" Value="2"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ColumnDefinition.Style>
-                </ColumnDefinition>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Grid.Resources>
-                <Style TargetType="{x:Type source:TextEditor}">
-                    <Setter Property="FontFamily" Value="Consolas"/>
-                    <Setter Property="FontSize" Value="12"/>
-                    <Setter Property="ShowLineNumbers" Value="True"/>
-                    <Setter Property="WordWrap" Value="{Binding WordWrap}"/>
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Setter Property="IsReadOnly" Value="True"/>
-                </Style>
-            </Grid.Resources>
             <tree:OpenXmlTreeView
                 Grid.Column="0"
                 BorderThickness="0"
                 ItemsSource="{Binding Path=TreeData}"
                 SelectedTreeItem="{Binding Path=SelectedItem, Mode=TwoWay}" />
-            <GridSplitter ResizeDirection="Columns" Background="Black" HorizontalAlignment="Stretch" ShowsPreview="True" Width="1" Grid.Column="1"/>
-            <source:TextEditor Grid.Column="2" Background="GhostWhite" Document ="{Binding XmlSourceDocument}" SyntaxHighlighting="{Binding XmlSourceDocumentSyntax}"/>
-            <GridSplitter ResizeDirection="Columns" Background="Black" HorizontalAlignment="Stretch" ShowsPreview="True" Width="1" Grid.Column="3"/>
-            <source:TextEditor Grid.Column="4" Background="LightGoldenrodYellow" Document="{Binding CodeDocument}" SyntaxHighlighting="{Binding CodeDocumentSyntax}"/>
+            <GridSplitter ResizeDirection="Columns" Width="2" Grid.Column="1"/>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition>
+                        <RowDefinition.Style>
+                            <Style TargetType="{x:Type RowDefinition}">
+                                <Setter Property="Height" Value="0"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsOpenXmlElement}" Value="True">
+                                        <Setter Property="Height" Value="*"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </RowDefinition.Style>
+                    </RowDefinition>
+                    <RowDefinition>
+                        <RowDefinition.Style>
+                            <Style TargetType="{x:Type RowDefinition}">
+                                <Setter Property="Height" Value="0"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsOpenXmlElement}" Value="True">
+                                        <Setter Property="Height" Value="2"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </RowDefinition.Style>
+                    </RowDefinition>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="{x:Type source:TextEditor}">
+                        <Setter Property="FontFamily" Value="Consolas"/>
+                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="ShowLineNumbers" Value="True"/>
+                        <Setter Property="WordWrap" Value="{Binding WordWrap}"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="IsReadOnly" Value="True"/>
+                    </Style>
+                </Grid.Resources>
+                <source:TextEditor Grid.Row="0" Background="GhostWhite" Document ="{Binding XmlSourceDocument}" SyntaxHighlighting="{Binding XmlSourceDocumentSyntax}"/>
+                <GridSplitter ResizeDirection="Rows" Height="2" Grid.Row="1"/>
+                <source:TextEditor  Grid.Row="2" Background="LightGoldenrodYellow" Document="{Binding CodeDocument}" SyntaxHighlighting="{Binding CodeDocumentSyntax}"/>
+            </Grid>
         </Grid>
     </DockPanel>
 </Window>
