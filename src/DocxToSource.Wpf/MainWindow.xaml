@@ -72,10 +72,12 @@
                     <RowDefinition>
                         <RowDefinition.Style>
                             <Style TargetType="{x:Type RowDefinition}">
-                                <Setter Property="Height" Value="0"/>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding IsOpenXmlElement}" Value="True">
                                         <Setter Property="Height" Value="*"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsOpenXmlElement}" Value="False">
+                                        <Setter Property="Height" Value="0"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -84,10 +86,12 @@
                     <RowDefinition>
                         <RowDefinition.Style>
                             <Style TargetType="{x:Type RowDefinition}">
-                                <Setter Property="Height" Value="0"/>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding IsOpenXmlElement}" Value="True">
                                         <Setter Property="Height" Value="2"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsOpenXmlElement}" Value="False">
+                                        <Setter Property="Height" Value="0"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -105,9 +109,9 @@
                         <Setter Property="IsReadOnly" Value="True"/>
                     </Style>
                 </Grid.Resources>
-                <source:TextEditor Grid.Row="0" Background="GhostWhite" Document ="{Binding XmlSourceDocument}" SyntaxHighlighting="{Binding XmlSourceDocumentSyntax}"/>
+                <source:TextEditor Grid.Row="0" Background="WhiteSmoke" Document ="{Binding XmlSourceDocument}" SyntaxHighlighting="{Binding XmlSourceDocumentSyntax}"/>
                 <GridSplitter ResizeDirection="Rows" Height="2" Grid.Row="1"/>
-                <source:TextEditor  Grid.Row="2" Background="LightGoldenrodYellow" Document="{Binding CodeDocument}" SyntaxHighlighting="{Binding CodeDocumentSyntax}"/>
+                <source:TextEditor  Grid.Row="2" Background="FloralWhite" Document="{Binding CodeDocument}" SyntaxHighlighting="{Binding CodeDocumentSyntax}"/>
             </Grid>
         </Grid>
     </DockPanel>
