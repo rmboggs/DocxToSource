@@ -19,8 +19,6 @@
     </Window.InputBindings>
     <Window.Resources>
         <Style TargetType="{x:Type GridSplitter}">
-            <Setter Property="Background" Value="Black"/>
-            <Setter Property="Foreground" Value="Black"/>
             <Setter Property="ShowsPreview" Value="True"/>
             <Setter Property="VerticalAlignment" Value="Stretch"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -41,9 +39,8 @@
                 <MenuItem Header="_Word Wrap" IsCheckable="True" IsChecked="{Binding WordWrap}"/>
                 <MenuItem Header="Syntax _Highlighting" IsCheckable="True" IsChecked="{Binding HighlightSyntax}" />
             </MenuItem>
-
         </Menu>
-        <ToolBar DockPanel.Dock="Top">
+        <ToolBar DockPanel.Dock="Top" Background="#FFF0F0F0" VerticalContentAlignment="Center">
             <TextBlock Margin="5 0">Language:</TextBlock>
             <ComboBox
                 Width="125"
@@ -58,7 +55,7 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2"/>
+                <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <tree:OpenXmlTreeView
@@ -66,7 +63,7 @@
                 BorderThickness="0"
                 ItemsSource="{Binding Path=TreeData}"
                 SelectedTreeItem="{Binding Path=SelectedItem, Mode=TwoWay}" />
-            <GridSplitter ResizeDirection="Columns" Width="2" Grid.Column="1"/>
+            <GridSplitter ResizeDirection="Columns" Width="5" Grid.Column="1"/>
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition>
@@ -88,7 +85,7 @@
                             <Style TargetType="{x:Type RowDefinition}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding IsOpenXmlElement}" Value="True">
-                                        <Setter Property="Height" Value="2"/>
+                                        <Setter Property="Height" Value="5"/>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding IsOpenXmlElement}" Value="False">
                                         <Setter Property="Height" Value="0"/>
@@ -110,7 +107,7 @@
                     </Style>
                 </Grid.Resources>
                 <source:TextEditor Grid.Row="0" Background="WhiteSmoke" Document ="{Binding XmlSourceDocument}" SyntaxHighlighting="{Binding XmlSourceDocumentSyntax}"/>
-                <GridSplitter ResizeDirection="Rows" Height="2" Grid.Row="1"/>
+                <GridSplitter ResizeDirection="Rows" Height="5" Grid.Row="1"/>
                 <source:TextEditor  Grid.Row="2" Background="FloralWhite" Document="{Binding CodeDocument}" SyntaxHighlighting="{Binding CodeDocumentSyntax}"/>
             </Grid>
         </Grid>
