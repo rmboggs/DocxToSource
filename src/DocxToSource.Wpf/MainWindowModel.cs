@@ -97,12 +97,6 @@ namespace DocxToSource.Wpf
         private bool _isOpenXmlElement;
 
         /// <summary>
-        /// Holds the collection of <see cref="LanguageDefinition"/> objects that
-        /// the user can select.
-        /// </summary>
-        private ObservableCollection<LanguageDefinition> _languageDefinitions;
-
-        /// <summary>
         /// Holds the openxml file package the is currently being reviewed.
         /// </summary>
         private OpenXmlPackage _oPkg;
@@ -173,15 +167,14 @@ namespace DocxToSource.Wpf
         {
             _currentFileDirectory = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
             _treeData = new ObservableCollection<OpenXmlTreeViewItem>();
-            TreeData = new ReadOnlyObservableCollection<OpenXmlTreeViewItem>(_treeData);
 
-            _languageDefinitions = new ObservableCollection<LanguageDefinition>();
-            LanguageDefinitions = new ReadOnlyObservableCollection<LanguageDefinition>(_languageDefinitions);
+            var langeDefs = new ObservableCollection<LanguageDefinition>();
+            LanguageDefinitions = new ReadOnlyObservableCollection<LanguageDefinition>(langeDefs);
 
             // Load the language definition list
-            _languageDefinitions.Add(new CSharpLanguageDefinition());
-            _languageDefinitions.Add(new VBLanguageDefinition());
-            //_languageDefinitions.Add(new BooLanguageDefinition());
+            langeDefs.Add(new CSharpLanguageDefinition());
+            langeDefs.Add(new VBLanguageDefinition());
+            //langeDefs.Add(new BooLanguageDefinition());
 
             // Set the default language
             SelectedLanguage = LanguageDefinitions[0];
@@ -356,10 +349,14 @@ namespace DocxToSource.Wpf
         /// <summary>
         /// Gets all of the openxml objects to display in the tree.
         /// </summary>
-        public ReadOnlyObservableCollection<OpenXmlTreeViewItem> TreeData
+        public ObservableCollection<OpenXmlTreeViewItem> TreeData
         {
-            get;
-            private set;
+            get { return _treeData; }
+            private set
+            {
+                _treeData = value;
+                FireChangeEvent(nameof(TreeData));
+            }
         }
 
         /// <summary>
