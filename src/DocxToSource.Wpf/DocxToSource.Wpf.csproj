@@ -35,12 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Boo.Lang">
-      <HintPath>References\Boo.Lang.dll</HintPath>
-    </Reference>
-    <Reference Include="Boo.Lang.CodeDom">
-      <HintPath>References\Boo.Lang.CodeDom.dll</HintPath>
-    </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CommonServiceLocator.2.0.4\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
@@ -108,7 +102,6 @@
     <Compile Include="Controls\OpenXmlPartTreeViewItem.cs" />
     <Compile Include="Controls\OpenXmlTreeView.cs" />
     <Compile Include="Controls\OpenXmlTreeViewItem.cs" />
-    <Compile Include="Languages\BooLanguageDefinition.cs" />
     <Compile Include="Languages\CSharpLanguageDefinition.cs" />
     <Compile Include="Languages\LanguageDefinition.cs" />
     <Compile Include="Languages\VBLanguageDefinition.cs" />
