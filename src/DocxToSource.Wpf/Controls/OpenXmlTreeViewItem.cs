@@ -144,9 +144,9 @@ namespace DocxToSource.Wpf.Controls
             {
                 throw new ArgumentNullException(nameof(elements));
             }
-            string header = null;
-            Row row = null;
-            Cell cell = null;
+            string header;
+            Row row;
+            Cell cell;
             uint index = 0;
 
             foreach (var e in elements)
