@@ -106,9 +106,9 @@
                         <Setter Property="IsReadOnly" Value="True"/>
                     </Style>
                 </Grid.Resources>
-                <source:TextEditor x:Name="xEditor1" Grid.Row="0" Background="WhiteSmoke" Document ="{Binding XmlSourceDocument}" SyntaxHighlighting="{Binding XmlSourceDocumentSyntax}"/>
+                <source:TextEditor x:Name="xXmlSourceEditor" Grid.Row="0" Background="WhiteSmoke" Document ="{Binding XmlSourceDocument}" SyntaxHighlighting="{Binding XmlSourceDocumentSyntax}"/>
                 <GridSplitter ResizeDirection="Rows" Height="5" Grid.Row="1"/>
-                <source:TextEditor x:Name="xEditor2" Grid.Row="2" Background="FloralWhite" Document="{Binding CodeDocument}" SyntaxHighlighting="{Binding CodeDocumentSyntax}"/>
+                <source:TextEditor x:Name="xCodeSourceEditor" Grid.Row="2" Background="FloralWhite" Document="{Binding CodeDocument}" SyntaxHighlighting="{Binding CodeDocumentSyntax}"/>
             </Grid>
         </Grid>
     </DockPanel>
