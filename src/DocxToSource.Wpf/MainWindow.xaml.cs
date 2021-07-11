@@ -23,6 +23,8 @@ namespace DocxToSource.Wpf
         public MainWindow()
         {
             InitializeComponent();
+            ICSharpCode.AvalonEdit.Search.SearchPanel.Install(this.xXmlSourceEditor);
+            ICSharpCode.AvalonEdit.Search.SearchPanel.Install(this.xCodeSourceEditor);
         }
     }
 }
