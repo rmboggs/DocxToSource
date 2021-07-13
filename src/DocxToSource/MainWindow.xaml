@@ -1,0 +1,116 @@
+﻿<Window x:Class="DocxToSource.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:source="http://icsharpcode.net/sharpdevelop/avalonedit"
+        xmlns:local="clr-namespace:DocxToSource"
+        xmlns:tree="clr-namespace:DocxToSource.Controls"
+        mc:Ignorable="d"
+        Title="Docx To Source" Height="600" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <local:MainWindowModel/>
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Key="Q" Modifiers="Ctrl" Command="{Binding QuitCommand}"/>
+        <KeyBinding Key="O" Modifiers="Ctrl" Command="{Binding OpenCommand}"/>
+        <KeyBinding Key="C" Modifiers="Ctrl" Command="{Binding CloseCommand}"/>
+    </Window.InputBindings>
+    <Window.Resources>
+        <Style TargetType="{x:Type GridSplitter}">
+            <Setter Property="ShowsPreview" Value="True"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+    </Window.Resources>
+    <DockPanel LastChildFill="True">
+
+        <Menu DockPanel.Dock="Top" Height="auto">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open" InputGestureText="Ctrl+O" Command="{Binding OpenCommand}"/>
+                <MenuItem Header="_Close" InputGestureText="Ctrl+C" Command="{Binding CloseCommand}"/>
+                <Separator/>
+                <MenuItem Header="_Quit" InputGestureText="Ctrl+Q" Command="{Binding QuitCommand}"/>
+            </MenuItem>
+            <MenuItem Header="_Source Code">
+                <MenuItem Header="_Generate Source Code" IsCheckable="True" IsChecked="{Binding GenerateSourceCode}"/>
+                <Separator/>
+                <MenuItem Header="_Word Wrap" IsCheckable="True" IsChecked="{Binding WordWrap}"/>
+                <MenuItem Header="Syntax _Highlighting" IsCheckable="True" IsChecked="{Binding HighlightSyntax}" />
+            </MenuItem>
+        </Menu>
+        <ToolBar DockPanel.Dock="Top" Background="#FFF0F0F0" VerticalContentAlignment="Center">
+            <TextBlock Margin="5 0">Language:</TextBlock>
+            <ComboBox
+                Width="125"
+                ItemsSource="{Binding LanguageDefinitions}"
+                SelectedItem="{Binding SelectedLanguage}">
+
+            </ComboBox>
+        </ToolBar>
+        <StatusBar DockPanel.Dock="Bottom">
+            <TextBlock/>
+        </StatusBar>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <tree:OpenXmlTreeView
+                Grid.Column="0"
+                BorderThickness="0"
+                ItemsSource="{Binding Path=TreeData}"
+                SelectedTreeItem="{Binding Path=SelectedItem, Mode=TwoWay}" />
+            <GridSplitter ResizeDirection="Columns" Width="5" Grid.Column="1"/>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition>
+                        <RowDefinition.Style>
+                            <Style TargetType="{x:Type RowDefinition}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsOpenXmlElement}" Value="True">
+                                        <Setter Property="Height" Value="*"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsOpenXmlElement}" Value="False">
+                                        <Setter Property="Height" Value="0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </RowDefinition.Style>
+                    </RowDefinition>
+                    <RowDefinition>
+                        <RowDefinition.Style>
+                            <Style TargetType="{x:Type RowDefinition}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsOpenXmlElement}" Value="True">
+                                        <Setter Property="Height" Value="5"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsOpenXmlElement}" Value="False">
+                                        <Setter Property="Height" Value="0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </RowDefinition.Style>
+                    </RowDefinition>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="{x:Type source:TextEditor}">
+                        <Setter Property="FontFamily" Value="Consolas"/>
+                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="ShowLineNumbers" Value="True"/>
+                        <Setter Property="WordWrap" Value="{Binding WordWrap}"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="IsReadOnly" Value="True"/>
+                    </Style>
+                </Grid.Resources>
+                <source:TextEditor x:Name="xXmlSourceEditor" Grid.Row="0" Background="WhiteSmoke" Document ="{Binding XmlSourceDocument}" SyntaxHighlighting="{Binding XmlSourceDocumentSyntax}"/>
+                <GridSplitter ResizeDirection="Rows" Height="5" Grid.Row="1"/>
+                <source:TextEditor x:Name="xCodeSourceEditor" Grid.Row="2" Background="FloralWhite" Document="{Binding CodeDocument}" SyntaxHighlighting="{Binding CodeDocumentSyntax}"/>
+            </Grid>
+        </Grid>
+    </DockPanel>
+
+</Window>
