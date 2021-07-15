@@ -4,6 +4,14 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Authors>Ryan Boggs</Authors>
+    <Company>Ryan Boggs</Company>
+    <PackageProjectUrl>https://github.com/rmboggs/docxtosource</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/rmboggs/docxtosource</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>openxml;DocumentFormat</PackageTags>
+    <Version>0.1.0-alpha</Version>
   </PropertyGroup>
 
   <ItemGroup>
