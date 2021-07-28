@@ -474,7 +474,6 @@ namespace DocxToSource
                 Multiselect = false,
                 CheckFileExists = true,
                 CheckPathExists = true,
-                ReadOnlyChecked = true,
                 Filter = fileFilter,
                 FilterIndex = 1
             };
@@ -494,14 +493,11 @@ namespace DocxToSource
             XmlSourceDocumentText = String.Empty;
             _fileName = String.Empty;
 
-            // See if the user left the Open as readonly flag on
-            var fShare = ofDialog.ReadOnlyChecked ? FileShare.ReadWrite : FileShare.Read;
-
             // Get the selected file details
             FileInfo fi = new(ofDialog.FileName);
             _currentFileDirectory = fi.Directory;
             _fileName = fi.Name;
-            _stream = fi.Open(FileMode.Open, FileAccess.Read, fShare);
+            _stream = fi.Open(FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             _pkg = Package.Open(_stream);
 
             // Setup a quick look up for easier package validation
