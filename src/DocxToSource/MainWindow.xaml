@@ -46,7 +46,6 @@
                 Width="125"
                 ItemsSource="{Binding LanguageDefinitions}"
                 SelectedItem="{Binding SelectedLanguage}">
-
             </ComboBox>
         </ToolBar>
         <StatusBar DockPanel.Dock="Bottom">
