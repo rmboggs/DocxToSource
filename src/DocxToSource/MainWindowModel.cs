@@ -461,10 +461,10 @@ namespace DocxToSource
             const string xlsxIdUri = "/xl/workbook.xml";
             const string pptxIdUri = "/ppt/presentation.xml";
             const string fileFilter =
-                "All Microsoft Office 2007+ valid documents (*.xlsx;*.xlsm;*.pptx;*.pptm;*.docx;*.docm)|*.xlsx;*.xlsm;*.pptx;*.pptm;*.docx;*.docm" +
+                "All Microsoft Office 2007+ valid documents (*.xlsx;*.xlsm;*.pptx;*.pptm;*.docx;*.docm;*.dotx)|*.xlsx;*.xlsm;*.pptx;*.pptm;*.docx;*.docm;*.dotx" +
                 "|Microsoft Excel 2007+ documents (*.xlsx;*.xlsm)|*.xlsx;*.xlsm" +
                 "|Microsoft Powerpoint 2007+ documents (*.pptx;*.pptm)|*.pptx;*.pptm" +
-                "|Microsoft Word 2007+ documents (*.docx;*.docm)|*.docx;*.docm" +
+                "|Microsoft Word 2007+ documents (*.docx;*.docm;*.dotx)|*.docx;*.docm;*.dotx" +
                 "|All files | *.*";
 
             bool? dialogResult;
