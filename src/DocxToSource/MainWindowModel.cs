@@ -35,6 +35,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.IO.Packaging;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -457,9 +458,9 @@ namespace DocxToSource
         /// </summary>
         private void OpenOfficeDocument()
         {
-            const string docxIdUri = "/word/document.xml";
-            const string xlsxIdUri = "/xl/workbook.xml";
-            const string pptxIdUri = "/ppt/presentation.xml";
+            const string docxIdUri = "/word/document";
+            const string xlsxIdUri = "/xl/workbook";
+            const string pptxIdUri = "/ppt/presentation";
             const string fileFilter =
                 "All Microsoft Office 2007+ valid documents|*.xlsx;*.xlsm;*.xltx;*.pptx;*.pptm;*.potx;*.docx;*.docm;*.dotx;*.dotm" +
                 "|Microsoft Excel 2007+ documents|*.xlsx;*.xlsm;*.xltx" +
@@ -508,9 +509,10 @@ namespace DocxToSource
                 { pptxIdUri, PresentationDocument.Open }
             };
 
+            var mainPart = _pkg.GetParts().First(x => x.ContentType.EndsWith("main+xml", StringComparison.Ordinal));
             foreach (KeyValuePair<string, Func<Package, OpenXmlPackage>> qp in quickPicks)
             {
-                if (_pkg.PartExists(new Uri(qp.Key, UriKind.Relative)))
+                if (mainPart.Uri.OriginalString.StartsWith(qp.Key, StringComparison.Ordinal))
                 {
                     _oPkg = qp.Value.Invoke(_pkg);
                     break;
